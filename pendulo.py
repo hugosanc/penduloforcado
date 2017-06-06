@@ -29,8 +29,8 @@ class Pendulo:
 		self.e= 0.5*self.m*(self.l*self.v)**2 +self.m*g*self.l*(1-math.cos(self.x))
 #declaração das variáveis	
 g=9.8
-A=0
-gama=0
+A=1.25
+gama=0.5
 wf=2./3.
 t1=0
 dt=0.01
@@ -42,13 +42,13 @@ t=np.arange(0,tmax,dt)
 x=np.zeros(t.size)
 v=np.zeros(t.size)
 e=np.zeros(t.size)
-x[0]=p1.x
+x[0]=p1.x%math.pi
 v[0]=p1.v
 e[0]=p1.e
 
 for i in range(t.size):
 	p1.move(t[i])
-	x[i]=p1.x
+	x[i]=p1.x%math.pi
 	v[i]=p1.v
 	e[i]=p1.e
 
@@ -65,14 +65,14 @@ ax.autoscale()
 
 plt.rc('text',usetex=True)
 plt.rc('font',**{'sans-serif':'Arial','family':'sans-serif'})
-plt.xlabel(r'\textnormal{t}')
+plt.xlabel(r'\textnormal{}')
 plt.ylabel(r'\textnormal{}')
-plt.title(r'\textnormal{Pendulo (A=0,gama=0)}',fontsize=12)
+plt.title(r'\textnormal{Pendulo (A=1.25,gama=0.5)}',fontsize=12)
 
-plt.plot(t,x,'-b',linewidth=1,label="Theta")
-plt.plot(t,v,'-g',linewidth=1,label="Velocidade")
-plt.plot(t,e,'-r',linewidth=1,label="Energia")
+plt.plot(x,v,'b.')
+#plt.plot(t,v,'g.',label="Velocidade")
+#plt.plot(t,e,'r.',label="Energia")
 plt.legend(loc="upper right")
 plt.grid()
-plt.savefig("pre.pdf",dpi=96)
+plt.savefig("efr.pdf",dpi=96)
 plt.show()
